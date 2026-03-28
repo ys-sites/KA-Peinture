@@ -199,13 +199,16 @@ const BeforeAfterGallery = ({ t }: { t: any }) => {
   ];
 
   const [startIndex, setStartIndex] = React.useState(0);
+  const [windowWidth, setWindowWidth] = React.useState(typeof window !== 'undefined' ? window.innerWidth : 0);
 
-  const next = () => {
-    setStartIndex((prev) => (prev + 1) % projects.length);
-  };
-  const prev = () => {
-    setStartIndex((prev) => (prev - 1 + projects.length) % projects.length);
-  };
+  React.useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const isDesktop = windowWidth >= 768;
+  const itemsPerPage = isDesktop ? 3 : 1;
 
   return (
     <Section id="work" className="bg-neutral-50 overflow-hidden">
@@ -221,13 +224,13 @@ const BeforeAfterGallery = ({ t }: { t: any }) => {
         </motion.div>
         <div className="flex gap-4 md:hidden">
           <button 
-            onClick={prev} 
+            onClick={() => setStartIndex(prev => Math.max(prev - 1, 0))} 
             className="w-14 h-14 rounded-full border border-neutral-200 flex items-center justify-center transition-all active:scale-95 hover:bg-white hover:shadow-lg"
           >
             <ChevronLeft size={24} />
           </button>
           <button 
-            onClick={next} 
+            onClick={() => setStartIndex(prev => Math.min(prev + 1, projects.length - itemsPerPage))} 
             className="w-14 h-14 rounded-full bg-primary text-white flex items-center justify-center transition-all active:scale-95 hover:bg-red-600 hover:shadow-lg"
           >
             <ChevronRight size={24} />
@@ -251,13 +254,35 @@ const BeforeAfterGallery = ({ t }: { t: any }) => {
         </AnimatePresence>
       </div>
 
-      {/* Laptop/Tablet: 3 examples */}
-      <div className="hidden md:grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {projects.slice(0, 3).map((project, idx) => (
-          <div key={idx} className="w-full">
-            <BeforeAfterSlider before={project.before} after={project.after} t={t} />
-          </div>
-        ))}
+      {/* Laptop/Tablet/Mobile: Carousel */}
+      <div className="relative w-full">
+        <div className="overflow-hidden">
+          <motion.div 
+            className="flex gap-6"
+            animate={{ x: `-${startIndex * (100 / itemsPerPage)}%` }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          >
+            {projects.map((project, idx) => (
+              <div key={idx} className={`flex-shrink-0 ${isDesktop ? 'w-1/3' : 'w-full'}`}>
+                <BeforeAfterSlider before={project.before} after={project.after} t={t} />
+              </div>
+            ))}
+          </motion.div>
+        </div>
+        
+        {/* Navigation Arrows */}
+        <button 
+          onClick={() => setStartIndex(prev => Math.max(prev - 1, 0))}
+          className="absolute top-1/2 -left-4 md:-left-12 -translate-y-1/2 bg-white p-3 rounded-full shadow-lg border border-neutral-200 z-10 hover:bg-neutral-50 transition-colors"
+        >
+          <ChevronLeft size={24} />
+        </button>
+        <button 
+          onClick={() => setStartIndex(prev => Math.min(prev + 1, projects.length - itemsPerPage))}
+          className="absolute top-1/2 -right-4 md:-right-12 -translate-y-1/2 bg-white p-3 rounded-full shadow-lg border border-neutral-200 z-10 hover:bg-neutral-50 transition-colors"
+        >
+          <ChevronRight size={24} />
+        </button>
       </div>
     </Section>
   );
@@ -312,6 +337,11 @@ function AppContent() {
 
   return (
     <main className="bg-white text-neutral-900 min-h-screen selection:bg-primary selection:text-white scroll-smooth">
+      {/* Fixed Logo */}
+      <div className="fixed top-4 left-4 z-50 bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-lg border border-neutral-200/50">
+        <Logo className="w-8 h-8" />
+      </div>
+
       {/* Navbar */}
       <motion.div 
         initial={{ opacity: 0, y: -20 }}
