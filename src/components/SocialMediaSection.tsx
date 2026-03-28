@@ -83,7 +83,7 @@ export default function SocialMediaSection() {
             whileHover={{ scale: 1.1, zIndex: 10, opacity: 1 }}
             transition={{ duration: 0.3 }}
           >
-            <img src={img} alt="" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+            <img src={img} alt="" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-black/40 hover:bg-transparent transition-colors duration-300" />
           </motion.div>
         ))}

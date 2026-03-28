@@ -9,6 +9,58 @@ import { ArrowRight, CheckCircle, Star, Phone, Mail, MapPin, ChevronDown, Instag
 import SocialMediaSection from "./components/SocialMediaSection";
 import { translations } from "./translations";
 import heroImg from "./components/hero.jpg";
+
+// Error Boundary Component
+interface ErrorBoundaryProps {
+  children: React.ReactNode;
+}
+
+interface ErrorBoundaryState {
+  hasError: boolean;
+  error: Error | null;
+}
+
+class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  constructor(props: ErrorBoundaryProps) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+
+  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    console.error("ErrorBoundary caught an error", error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="min-h-screen flex items-center justify-center bg-neutral-50 p-4 text-center">
+          <div className="max-w-md w-full bg-white p-8 rounded-2xl shadow-xl border border-neutral-200">
+            <h2 className="text-2xl font-bold text-neutral-900 mb-4">Something went wrong</h2>
+            <p className="text-neutral-600 mb-6">The application encountered an unexpected error. Please try refreshing the page.</p>
+            <button 
+              onClick={() => window.location.reload()}
+              className="px-6 py-3 bg-primary text-white rounded-full font-semibold hover:bg-primary/90 transition-colors"
+            >
+              Refresh Page
+            </button>
+            {import.meta.env.DEV && (
+              <pre className="mt-6 p-4 bg-neutral-100 rounded text-left text-xs overflow-auto max-h-40">
+                {this.state.error?.toString()}
+              </pre>
+            )}
+          </div>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
+
 import kaImg from "./components/ka.png";
 import b1 from "./components/before1.jpeg";
 import a1 from "./components/after1.jpeg";
@@ -103,7 +155,7 @@ const BeforeAfterSlider = ({ before, after, t }: { before: string; after: string
       onMouseMove={handleMouseMove}
       onTouchMove={handleTouchMove}
     >
-      <img src={after} alt="After" className="absolute inset-0 w-full h-full object-cover" referrerPolicy="no-referrer" />
+      <img src={after} alt="After" className="absolute inset-0 w-full h-full object-cover" />
       <div 
         className="absolute inset-0 w-full h-full overflow-hidden"
         style={{ width: `${sliderPos}%` }}
@@ -112,7 +164,6 @@ const BeforeAfterSlider = ({ before, after, t }: { before: string; after: string
           src={before} 
           alt="Before" 
           className="absolute inset-0 w-full h-full object-cover" 
-          referrerPolicy="no-referrer" 
         />
       </div>
 
@@ -168,7 +219,7 @@ const BeforeAfterGallery = ({ t }: { t: any }) => {
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">{t.transformation.title}</h2>
           <p className="text-neutral-600 max-w-xl">{t.transformation.subtitle}</p>
         </motion.div>
-        <div className="flex gap-4">
+        <div className="flex gap-4 md:hidden">
           <button 
             onClick={prev} 
             className="w-14 h-14 rounded-full border border-neutral-200 flex items-center justify-center transition-all active:scale-95 hover:bg-white hover:shadow-lg"
@@ -213,6 +264,14 @@ const BeforeAfterGallery = ({ t }: { t: any }) => {
 };
 
 export default function App() {
+  return (
+    <ErrorBoundary>
+      <AppContent />
+    </ErrorBoundary>
+  );
+}
+
+function AppContent() {
   const [lang, setLang] = React.useState<'en' | 'fr'>('en');
   const t = translations[lang];
 
@@ -515,7 +574,6 @@ export default function App() {
               src={kaImg} 
               alt="Professional Painter" 
               className="w-full h-full object-cover grayscale brightness-105 contrast-105 hover:grayscale-0 transition-all duration-700"
-              referrerPolicy="no-referrer"
             />
           </div>
           
@@ -606,8 +664,8 @@ export default function App() {
           <div className="grid grid-cols-6 grid-rows-6 h-full">
             {[i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i1, i2, i3].map((img, i) => (
               <div key={i} className="relative group/item">
-                <img src={img} alt="" className="w-full h-full object-cover opacity-5 group-hover/main:blur-sm group-hover/main:opacity-10 transition-all duration-500" referrerPolicy="no-referrer" />
-                <img src={img} alt="" className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover/item:opacity-100 group-hover/item:blur-0 transition-all duration-300" referrerPolicy="no-referrer" />
+                <img src={img} alt="" className="w-full h-full object-cover opacity-5 group-hover/main:blur-sm group-hover/main:opacity-10 transition-all duration-500" />
+                <img src={img} alt="" className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover/item:opacity-100 group-hover/item:blur-0 transition-all duration-300" />
               </div>
             ))}
           </div>
@@ -719,7 +777,7 @@ export default function App() {
                 </div>
                 
                 {status === 'error' && (
-                  <p className="text-red-500 text-xs md:text-sm font-medium">{t.contact.error}</p>
+                  <p className="text-red-500 text-xs md:text-sm font-medium">{t.contact.form.error}</p>
                 )}
 
                 <button 
