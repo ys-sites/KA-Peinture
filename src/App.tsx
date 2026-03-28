@@ -148,7 +148,6 @@ const BeforeAfterGallery = ({ t }: { t: any }) => {
   ];
 
   const [startIndex, setStartIndex] = React.useState(0);
-  const visibleCount = 1;
 
   const next = () => {
     setStartIndex((prev) => (prev + 1) % projects.length);
@@ -185,21 +184,29 @@ const BeforeAfterGallery = ({ t }: { t: any }) => {
         </div>
       </div>
 
-      <div className="flex justify-center">
+      {/* Mobile: 1 example */}
+      <div className="md:hidden flex justify-center">
         <AnimatePresence initial={false} mode="popLayout">
-          {projects.slice(startIndex, startIndex + visibleCount).map((project, idx) => (
-            <motion.div
-              key={startIndex}
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.4 }}
-              className="w-full max-w-2xl"
-            >
-              <BeforeAfterSlider before={project.before} after={project.after} t={t} />
-            </motion.div>
-          ))}
+          <motion.div
+            key={startIndex}
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -50 }}
+            transition={{ duration: 0.4 }}
+            className="w-full max-w-2xl"
+          >
+            <BeforeAfterSlider before={projects[startIndex].before} after={projects[startIndex].after} t={t} />
+          </motion.div>
         </AnimatePresence>
+      </div>
+
+      {/* Laptop/Tablet: 3 examples */}
+      <div className="hidden md:grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {projects.slice(0, 3).map((project, idx) => (
+          <div key={idx} className="w-full">
+            <BeforeAfterSlider before={project.before} after={project.after} t={t} />
+          </div>
+        ))}
       </div>
     </Section>
   );

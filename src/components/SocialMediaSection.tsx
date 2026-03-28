@@ -123,35 +123,45 @@ export default function SocialMediaSection() {
           </motion.p>
         </div>
 
-        {/* Video Carousel - Single Video */}
-        <div className="relative flex items-center justify-center max-w-sm mx-auto">
-          <button 
-            onClick={prevSlide}
-            className="absolute -left-12 z-30 p-3 bg-white/10 backdrop-blur-md rounded-full text-white hover:bg-white/20 transition-all"
-          >
-            <ChevronLeft size={24} />
-          </button>
-          
-          <div className="w-full overflow-hidden">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentIndex}
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -50 }}
-                transition={{ duration: 0.3 }}
-              >
-                <VideoCard video={VIDEOS[currentIndex]} index={0} />
-              </motion.div>
-            </AnimatePresence>
+        {/* Video Display */}
+        <div className="relative">
+          {/* Mobile: Carousel with Arrows */}
+          <div className="md:hidden relative flex items-center justify-center max-w-sm mx-auto">
+            <button 
+              onClick={prevSlide}
+              className="absolute -left-12 z-30 p-3 bg-white/10 backdrop-blur-md rounded-full text-white hover:bg-white/20 transition-all"
+            >
+              <ChevronLeft size={24} />
+            </button>
+            
+            <div className="w-full overflow-hidden">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentIndex}
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -50 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <VideoCard video={VIDEOS[currentIndex]} index={0} />
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            <button 
+              onClick={nextSlide}
+              className="absolute -right-12 z-30 p-3 bg-white/10 backdrop-blur-md rounded-full text-white hover:bg-white/20 transition-all"
+            >
+              <ChevronRight size={24} />
+            </button>
           </div>
 
-          <button 
-            onClick={nextSlide}
-            className="absolute -right-12 z-30 p-3 bg-white/10 backdrop-blur-md rounded-full text-white hover:bg-white/20 transition-all"
-          >
-            <ChevronRight size={24} />
-          </button>
+          {/* Laptop/Tablet: Grid without Arrows */}
+          <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-6">
+            {VIDEOS.map((video, index) => (
+              <VideoCard key={video.id} video={video} index={index} />
+            ))}
+          </div>
         </div>
       </div>
     </div>
