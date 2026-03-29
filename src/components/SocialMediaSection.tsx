@@ -21,7 +21,7 @@ const VIDEOS = [
   {
     id: 2,
     title: "La peinture",
-    videoUrl: "/media/vid2.mp4",
+    videoUrl: "/media/vid2_new.mp4",
     poster: "/media/img2.jpeg",
     igLink: "https://www.instagram.com/reel/DVYn2kAET6p/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
   },
@@ -43,6 +43,19 @@ const VIDEOS = [
 
 export default function SocialMediaSection({ t }: { t: any }) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  React.useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Reduce background complexity for mobile
+  const rowsCount = isMobile ? 3 : 5;
+  const imagesPerRow = isMobile ? 6 : BACKGROUND_IMAGES.length;
+  const mobileImages = BACKGROUND_IMAGES.slice(0, imagesPerRow);
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % VIDEOS.length);
@@ -56,8 +69,8 @@ export default function SocialMediaSection({ t }: { t: any }) {
     <div className="relative w-full min-h-[70vh] overflow-hidden flex items-center justify-center">
       {/* Background Grid - Animated Rows */}
       <div className="absolute inset-0 z-0 flex flex-col gap-2 opacity-30 will-change-transform overflow-hidden">
-        {/* Five Rows: Right to Left */}
-        {[...Array(5)].map((_, rowIndex) => (
+        {/* Animated Rows */}
+        {[...Array(rowsCount)].map((_, rowIndex) => (
           <motion.div 
             key={rowIndex}
             className="flex gap-2 will-change-transform"
@@ -68,8 +81,8 @@ export default function SocialMediaSection({ t }: { t: any }) {
               repeat: Infinity 
             }}
           >
-            {[...BACKGROUND_IMAGES, ...BACKGROUND_IMAGES].map((img, i) => (
-              <div key={i} className="w-64 h-48 rounded-lg overflow-hidden shrink-0">
+            {[...(isMobile ? mobileImages : BACKGROUND_IMAGES), ...(isMobile ? mobileImages : BACKGROUND_IMAGES)].map((img, i) => (
+              <div key={i} className="w-48 h-36 md:w-64 md:h-48 rounded-lg overflow-hidden shrink-0">
                 <img src={img} alt="" className="w-full h-full object-cover" loading="lazy" />
               </div>
             ))}
@@ -117,9 +130,9 @@ export default function SocialMediaSection({ t }: { t: any }) {
           <div className="md:hidden relative flex items-center justify-center max-w-sm mx-auto">
             <button 
               onClick={prevSlide}
-              className="absolute -left-12 z-30 p-3 bg-white/10 backdrop-blur-md rounded-full text-white hover:bg-white/20 transition-all"
+              className="absolute left-0 z-30 w-10 h-16 flex items-center justify-center bg-black/60 backdrop-blur-md text-white hover:bg-black/80 transition-all rounded-r-full"
             >
-              <ChevronLeft size={24} />
+              <ChevronLeft size={24} className="mr-1" />
             </button>
             
             <div className="w-full overflow-hidden">
@@ -138,9 +151,9 @@ export default function SocialMediaSection({ t }: { t: any }) {
 
             <button 
               onClick={nextSlide}
-              className="absolute -right-12 z-30 p-3 bg-white/10 backdrop-blur-md rounded-full text-white hover:bg-white/20 transition-all"
+              className="absolute right-0 z-30 w-10 h-16 flex items-center justify-center bg-black/60 backdrop-blur-md text-white hover:bg-black/80 transition-all rounded-l-full"
             >
-              <ChevronRight size={24} />
+              <ChevronRight size={24} className="ml-1" />
             </button>
           </div>
 
@@ -158,16 +171,29 @@ export default function SocialMediaSection({ t }: { t: any }) {
 
 function VideoCard({ video, index, t }: { video: any, index: number, key?: React.Key, t: any }) {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlayPending, setIsPlayPending] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const togglePlay = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
+    if (!videoRef.current || isPlayPending) return;
+
+    if (!videoRef.current.paused) {
+      videoRef.current.pause();
+    } else {
+      setIsPlayPending(true);
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            setIsPlayPending(false);
+          })
+          .catch(error => {
+            console.log("Playback prevented:", error);
+            setIsPlayPending(false);
+          });
       } else {
-        videoRef.current.play();
+        setIsPlayPending(false);
       }
-      setIsPlaying(!isPlaying);
     }
   };
 
@@ -213,6 +239,7 @@ function VideoCard({ video, index, t }: { video: any, index: number, key?: React
           className="w-full h-full object-cover"
           loop
           playsInline
+          preload="none"
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
         />

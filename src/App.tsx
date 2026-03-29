@@ -6,7 +6,7 @@
 import React from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowRight, CheckCircle, Star, Phone, Mail, MapPin, ChevronDown, Instagram, Clock, ShieldCheck, Sparkles, Facebook, Quote, ChevronLeft, ChevronRight, Globe } from "lucide-react";
-import SocialMediaSection from "./components/SocialMediaSection";
+const SocialMediaSection = React.lazy(() => import("./components/SocialMediaSection"));
 import { translations } from "./translations";
 
 
@@ -127,7 +127,7 @@ const BeforeAfterSlider = ({ before, after, t }: { before: string; after: string
       onMouseMove={handleMouseMove}
       onTouchMove={handleTouchMove}
     >
-      <img src={after} alt="After" className="absolute inset-0 w-full h-full object-cover" />
+      <img src={after} alt="After" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
       <div 
         className="absolute inset-0 w-full h-full overflow-hidden"
         style={{ width: `${sliderPos}%` }}
@@ -136,6 +136,7 @@ const BeforeAfterSlider = ({ before, after, t }: { before: string; after: string
           src={before} 
           alt="Before" 
           className="absolute inset-0 w-full h-full object-cover" 
+          loading="lazy"
         />
       </div>
 
@@ -194,10 +195,10 @@ const BeforeAfterGallery = ({ t }: { t: any }) => {
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">{t.transformation.title}</h2>
           <p className="text-neutral-600 max-w-xl">{t.transformation.subtitle}</p>
         </motion.div>
-        <div className="flex gap-4 md:hidden">
+        <div className="flex gap-4">
           <button 
             onClick={() => setStartIndex(prev => Math.max(prev - 1, 0))} 
-            className="w-14 h-14 rounded-full border border-neutral-200 flex items-center justify-center transition-all active:scale-95 hover:bg-white hover:shadow-lg"
+            className="w-14 h-14 rounded-full bg-primary text-white flex items-center justify-center transition-all active:scale-95 hover:bg-red-600 hover:shadow-lg"
           >
             <ChevronLeft size={24} />
           </button>
@@ -210,51 +211,23 @@ const BeforeAfterGallery = ({ t }: { t: any }) => {
         </div>
       </div>
 
-      {/* Mobile: 1 example */}
-      <div className="md:hidden flex justify-center">
-        <AnimatePresence initial={false} mode="popLayout">
-          <motion.div
-            key={startIndex}
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -50 }}
-            transition={{ duration: 0.4 }}
-            className="w-full max-w-2xl"
-          >
-            <BeforeAfterSlider before={projects[startIndex].before} after={projects[startIndex].after} t={t} />
-          </motion.div>
-        </AnimatePresence>
-      </div>
-
       {/* Laptop/Tablet/Mobile: Carousel */}
       <div className="relative w-full">
-        <div className="overflow-hidden">
+        <div className="overflow-hidden px-4 md:px-0">
           <motion.div 
-            className="flex gap-6"
+            className="flex"
             animate={{ x: `-${startIndex * (100 / itemsPerPage)}%` }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
           >
             {projects.map((project, idx) => (
-              <div key={idx} className={`flex-shrink-0 ${isDesktop ? 'w-1/3' : 'w-full'}`}>
-                <BeforeAfterSlider before={project.before} after={project.after} t={t} />
+              <div key={idx} className={`flex-shrink-0 px-2 md:px-3 ${isDesktop ? 'w-1/3' : 'w-full'}`}>
+                <div className="max-w-md mx-auto md:max-w-none">
+                  <BeforeAfterSlider before={project.before} after={project.after} t={t} />
+                </div>
               </div>
             ))}
           </motion.div>
         </div>
-        
-        {/* Navigation Arrows */}
-        <button 
-          onClick={() => setStartIndex(prev => Math.max(prev - 1, 0))}
-          className="absolute top-1/2 -left-4 md:-left-12 -translate-y-1/2 bg-white p-3 rounded-full shadow-lg border border-neutral-200 z-10 hover:bg-neutral-50 transition-colors"
-        >
-          <ChevronLeft size={24} />
-        </button>
-        <button 
-          onClick={() => setStartIndex(prev => Math.min(prev + 1, projects.length - itemsPerPage))}
-          className="absolute top-1/2 -right-4 md:-right-12 -translate-y-1/2 bg-white p-3 rounded-full shadow-lg border border-neutral-200 z-10 hover:bg-neutral-50 transition-colors"
-        >
-          <ChevronRight size={24} />
-        </button>
       </div>
     </Section>
   );
@@ -442,7 +415,9 @@ function AppContent() {
       </Section>
 
       <Section className="bg-neutral-950 px-0 py-0 overflow-hidden">
-        <SocialMediaSection t={t} />
+        <React.Suspense fallback={<div className="min-h-[70vh] bg-neutral-950 flex items-center justify-center"><Logo className="w-16 h-16 animate-pulse" /></div>}>
+          <SocialMediaSection t={t} />
+        </React.Suspense>
       </Section>
 
       {/* Services */}
@@ -567,10 +542,20 @@ function AppContent() {
         <div className="grid md:grid-cols-2 min-h-[600px]">
           {/* Image Side */}
           <div className="relative h-[400px] md:h-auto w-full">
+            {/* Mobile Image: Colors when in view */}
+            <motion.img 
+              src="/media/ka.png" 
+              alt="Professional Painter" 
+              initial={{ filter: "grayscale(100%) brightness(105%) contrast(105%)" }}
+              whileInView={{ filter: "grayscale(0%) brightness(100%) contrast(100%)" }}
+              viewport={{ margin: "-20% 0px -20% 0px" }}
+              className="w-full h-full object-cover md:hidden transition-all duration-700"
+            />
+            {/* Desktop Image: Colors on hover */}
             <img 
               src="/media/ka.png" 
               alt="Professional Painter" 
-              className="w-full h-full object-cover grayscale brightness-105 contrast-105 hover:grayscale-0 transition-all duration-700"
+              className="hidden md:block w-full h-full object-cover grayscale brightness-105 contrast-105 hover:grayscale-0 transition-all duration-700"
             />
           </div>
           

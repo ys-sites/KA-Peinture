@@ -63,7 +63,8 @@ export const translations = {
       title: "See Our Work in Action",
       subtitle: "Get a behind-the-scenes look at how we transform spaces across Montreal.",
       before: "Before",
-      after: "After"
+      after: "After",
+      viewOnIg: "View on Instagram"
     },
     testimonials: {
       title: "The Trust of Our Customers",
@@ -187,7 +188,8 @@ export const translations = {
       title: "Voyez notre travail en action",
       subtitle: "Obtenez un aperçu des coulisses et voyez comment nous transformons les espaces à travers Montréal.",
       before: "Avant",
-      after: "Après"
+      after: "Après",
+      viewOnIg: "Voir sur Instagram"
     },
     testimonials: {
       title: "La confiance de nos clients",
