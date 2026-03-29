@@ -66,9 +66,9 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
 const Section = ({ children, className = "", innerClassName = "", id, delay = 0 }: { children: React.ReactNode; className?: string; innerClassName?: string; id?: string; delay?: number }) => (
   <section id={id} className={`py-20 px-6 ${className}`}>
     <motion.div 
-      initial={{ opacity: 0, y: 40, scale: 0.95 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, margin: "-100px" }}
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.8, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
       className={`max-w-6xl mx-auto ${innerClassName}`}
     >
@@ -76,6 +76,7 @@ const Section = ({ children, className = "", innerClassName = "", id, delay = 0 
     </motion.div>
   </section>
 );
+
 
 const Logo = ({ className = "" }: { className?: string }) => (
   <svg viewBox="0 0 200 160" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -182,7 +183,7 @@ const BeforeAfterGallery = ({ t }: { t: any }) => {
   const itemsPerPage = isDesktop ? 3 : 1;
 
   return (
-    <Section id="work" className="bg-neutral-50 overflow-hidden">
+    <Section id="portfolio" className="bg-neutral-50 overflow-hidden">
       <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -308,11 +309,6 @@ function AppContent() {
 
   return (
     <main className="bg-white text-neutral-900 min-h-screen selection:bg-primary selection:text-white scroll-smooth">
-      {/* Fixed Logo */}
-      <div className="fixed top-4 left-4 z-50 bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-lg border border-neutral-200/50">
-        <Logo className="w-8 h-8" />
-      </div>
-
       {/* Navbar */}
       <motion.div 
         initial={{ opacity: 0, y: -20 }}
@@ -446,7 +442,7 @@ function AppContent() {
       </Section>
 
       <Section className="bg-neutral-950 px-0 py-0 overflow-hidden">
-        <SocialMediaSection />
+        <SocialMediaSection t={t} />
       </Section>
 
       {/* Services */}
@@ -723,7 +719,7 @@ function AppContent() {
                     <input 
                       type="tel" 
                       className="w-full px-3 md:px-4 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all bg-white text-sm md:text-base" 
-                      placeholder="(514) 555-0123" 
+                      placeholder="(514) 622-1599" 
                       required 
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
@@ -814,25 +810,28 @@ function AppContent() {
           transition={{ duration: 0.8 }}
           className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-center gap-x-12 gap-y-10 items-center"
         >
-          <div className="flex flex-col items-center gap-4 shrink-0">
-            <div className="text-white">
-              <Logo className="w-28" />
-            </div>
-            <div className="flex gap-4 justify-center">
-              <a href="https://www.instagram.com/ka.peinture/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-neutral-900 flex items-center justify-center hover:bg-primary hover:text-white transition-all">
-                <Instagram size={16} />
-              </a>
-              <a href="https://www.facebook.com/ka.peinture1" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-neutral-900 flex items-center justify-center hover:bg-primary hover:text-white transition-all">
-                <Facebook size={16} />
-              </a>
+          <div className="flex flex-col items-start gap-4 shrink-0 md:w-1/3">
+            <div className="text-white flex items-center gap-4">
+              <Logo className="w-48 h-48" />
+              <div className="flex flex-col gap-2">
+                <span className="text-2xl font-bold tracking-tight">KA Peinture</span>
+                <div className="flex gap-4 justify-start">
+                  <a href="https://www.instagram.com/ka.peinture/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-neutral-900 flex items-center justify-center hover:bg-primary hover:text-white transition-all">
+                    <Instagram size={20} />
+                  </a>
+                  <a href="https://www.facebook.com/ka.peinture1" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-neutral-900 flex items-center justify-center hover:bg-primary hover:text-white transition-all">
+                    <Facebook size={20} />
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
           
-          <div className="max-w-xs text-center md:text-left">
+          <div className="max-w-xs text-center md:text-left md:w-1/3">
             <p className="leading-relaxed text-neutral-300 text-sm">{t.footer.desc}</p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-10 md:gap-12 text-center md:text-left">
+          <div className="flex flex-col sm:flex-row gap-10 md:gap-12 text-center md:text-left md:w-1/3 justify-end">
             <div>
               <h4 className="text-white font-bold mb-6">{t.footer.links}</h4>
               <ul className="space-y-3">
@@ -845,7 +844,7 @@ function AppContent() {
             <div>
               <h4 className="text-white font-bold mb-6">{t.footer.contact}</h4>
               <ul className="space-y-3">
-                <li className="flex items-center gap-3"><Phone size={16} className="text-primary" /> (514) 518-5703</li>
+                <li className="flex items-center gap-3"><Phone size={16} className="text-primary" /> (514) 622-1599</li>
                 <li className="flex items-center gap-3"><Mail size={16} className="text-primary" /> info@kapeinture.com</li>
                 <li className="flex items-center gap-3"><MapPin size={16} className="text-primary" /> {t.footer.location}</li>
               </ul>
@@ -859,7 +858,7 @@ function AppContent() {
 
       {/* Floating Call Button */}
       <motion.a
-        href="tel:5145185703"
+        href="tel:5146221599"
         initial={{ opacity: 0, scale: 0.5, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         whileHover={{ scale: 1.1 }}
@@ -869,7 +868,7 @@ function AppContent() {
       >
         <Phone size={24} className="group-hover:animate-bounce" />
         <span className="absolute right-full mr-4 bg-white text-neutral-900 px-4 py-2 rounded-xl text-sm font-bold shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none border border-neutral-100">
-          {t.hero.consultation.split(':')[0]} (514) 518-5703
+          {t.hero.consultation.split(':')[0]} (514) 622-1599
         </span>
       </motion.a>
     </main>

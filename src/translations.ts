@@ -60,8 +60,8 @@ export const translations = {
       cta: "Get A Free Quote Now"
     },
     transformation: {
-      title: "The KA Transformation",
-      subtitle: "Slide the handles to see the difference our professional process makes. No shortcuts, just stunning results.",
+      title: "See Our Work in Action",
+      subtitle: "Get a behind-the-scenes look at how we transform spaces across Montreal.",
       before: "Before",
       after: "After"
     },
@@ -183,8 +183,8 @@ export const translations = {
       cta: "Obtenez un devis gratuit maintenant"
     },
     transformation: {
-      title: "La Transformation KA",
-      subtitle: "Faites glisser les poignées pour voir la différence que notre processus professionnel fait. Pas de raccourcis, juste des résultats époustouflants.",
+      title: "Voyez notre travail en action",
+      subtitle: "Obtenez un aperçu des coulisses et voyez comment nous transformons les espaces à travers Montréal.",
       before: "Avant",
       after: "Après"
     },

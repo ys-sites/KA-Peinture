@@ -41,7 +41,7 @@ const VIDEOS = [
   }
 ];
 
-export default function SocialMediaSection() {
+export default function SocialMediaSection({ t }: { t: any }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
@@ -54,25 +54,28 @@ export default function SocialMediaSection() {
 
   return (
     <div className="relative w-full min-h-[70vh] overflow-hidden flex items-center justify-center">
-      {/* Background Grid - Zooming out animation */}
-      <motion.div 
-        className="absolute inset-0 z-0 grid grid-cols-3 md:grid-cols-6 gap-2 opacity-60"
-        initial={{ scale: 1.3 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 30, ease: "linear", repeat: Infinity, repeatType: "reverse" }}
-      >
-        {BACKGROUND_IMAGES.map((img, i) => (
+      {/* Background Grid - Animated Rows */}
+      <div className="absolute inset-0 z-0 flex flex-col gap-2 opacity-30 will-change-transform overflow-hidden">
+        {/* Five Rows: Right to Left */}
+        {[...Array(5)].map((_, rowIndex) => (
           <motion.div 
-            key={i}
-            className="relative w-full h-32 md:h-48 rounded-lg overflow-hidden cursor-pointer"
-            whileHover={{ scale: 1.1, zIndex: 10, opacity: 1 }}
-            transition={{ duration: 0.3 }}
+            key={rowIndex}
+            className="flex gap-2 will-change-transform"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ 
+              duration: 60 + (rowIndex * 10), 
+              ease: "linear", 
+              repeat: Infinity 
+            }}
           >
-            <img src={img} alt="" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-black/40 hover:bg-transparent transition-colors duration-300" />
+            {[...BACKGROUND_IMAGES, ...BACKGROUND_IMAGES].map((img, i) => (
+              <div key={i} className="w-64 h-48 rounded-lg overflow-hidden shrink-0">
+                <img src={img} alt="" className="w-full h-full object-cover" loading="lazy" />
+              </div>
+            ))}
           </motion.div>
         ))}
-      </motion.div>
+      </div>
 
       {/* Overlay gradient to ensure text readability */}
       <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/80 via-neutral-950/40 to-neutral-950/85 z-10 pointer-events-none" />
@@ -95,7 +98,7 @@ export default function SocialMediaSection() {
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight"
           >
-            See Our Work in Action
+            {t.transformation.title}
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -104,7 +107,7 @@ export default function SocialMediaSection() {
             transition={{ delay: 0.2 }}
             className="text-neutral-300 max-w-2xl mx-auto text-lg"
           >
-            Get a behind-the-scenes look at how we transform spaces across Montreal.
+            {t.transformation.subtitle}
           </motion.p>
         </div>
 
@@ -128,7 +131,7 @@ export default function SocialMediaSection() {
                   exit={{ opacity: 0, x: -50 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <VideoCard video={VIDEOS[currentIndex]} index={0} />
+                  <VideoCard video={VIDEOS[currentIndex]} index={0} t={t} />
                 </motion.div>
               </AnimatePresence>
             </div>
@@ -144,7 +147,7 @@ export default function SocialMediaSection() {
           {/* Laptop/Tablet: Grid without Arrows */}
           <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-6">
             {VIDEOS.map((video, index) => (
-              <VideoCard key={video.id} video={video} index={index} />
+              <VideoCard key={video.id} video={video} index={index} t={t} />
             ))}
           </div>
         </div>
@@ -153,7 +156,7 @@ export default function SocialMediaSection() {
   );
 }
 
-function VideoCard({ video, index }: { video: any, index: number, key?: React.Key }) {
+function VideoCard({ video, index, t }: { video: any, index: number, key?: React.Key, t: any }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -193,7 +196,7 @@ function VideoCard({ video, index }: { video: any, index: number, key?: React.Ke
         </div>
         <div className="flex-none">
           <span className="block text-[11px] sm:text-xs text-neutral-400 font-medium px-3 py-1.5 rounded-full bg-white/10 group-hover:bg-white/20 group-hover:text-white transition-colors whitespace-nowrap">
-            View on IG
+            {t.transformation.viewOnIg || "View on IG"}
           </span>
         </div>
       </a>
