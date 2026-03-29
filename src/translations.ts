@@ -119,7 +119,8 @@ export const translations = {
       links: "Quick Links",
       contact: "Contact",
       rights: "© 2026 KA Peinture. All rights reserved.",
-      location: "Montreal, Quebec"
+      location: "Montreal, Quebec",
+      email: "admin@kapeinturemontreal.ca"
     },
     floatingCall: "Call"
   },
@@ -233,7 +234,8 @@ export const translations = {
       links: "Liens rapides",
       contact: "Contact",
       rights: "© 2026 KA Peinture. Tous droits réservés.",
-      location: "Montréal, Québec"
+      location: "Montréal, Québec",
+      email: "admin@kapeinturemontreal.ca"
     },
     floatingCall: "Appeler"
   }
