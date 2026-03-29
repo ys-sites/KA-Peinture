@@ -2,41 +2,56 @@ import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Instagram, Play, ChevronLeft, ChevronRight } from 'lucide-react';
 
+import img1 from './img1.jpeg';
+import img2 from './img2.jpeg';
+import img3 from './img3.jpeg';
+import img4 from './img4.jpeg';
+import img5 from './img5.jpeg';
+import img6 from './img6.jpeg';
+import img7 from './img7.jpeg';
+import img8 from './img8.jpeg';
+import img9 from './img9.jpeg';
+import img10 from './img10.jpeg';
+import img11 from './img11.jpeg';
 
+import vid1 from './vid1.mp4';
+import vid2 from './vid2.mp4';
+import vid3 from './vid3.mp4';
+import vid4 from './vid4.mp4';
 
 const BACKGROUND_IMAGES = [
-  "/media/img1.jpeg", "/media/img2.jpeg", "/media/img3.jpeg", "/media/img4.jpeg", "/media/img5.jpeg", "/media/img6.jpeg",
-  "/media/img7.jpeg", "/media/img8.jpeg", "/media/img9.jpeg", "/media/img10.jpeg", "/media/img11.jpeg", "/media/img1.jpeg",
-  "/media/img2.jpeg", "/media/img3.jpeg", "/media/img4.jpeg", "/media/img5.jpeg", "/media/img6.jpeg", "/media/img7.jpeg"
+  img1, img2, img3, img4, img5, img6,
+  img7, img8, img9, img10, img11, img1,
+  img2, img3, img4, img5, img6, img7
 ];
 
 const VIDEOS = [
   {
     id: 1,
     title: "Doing it properly",
-    videoUrl: "/media/vid1.mp4",
-    poster: "/media/img1.jpeg",
+    videoUrl: vid1,
+    poster: img1,
     igLink: "https://www.instagram.com/reel/DViwbMGETk7/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
   },
   {
     id: 2,
     title: "La peinture",
-    videoUrl: "/media/vid2.mp4",
-    poster: "/media/img2.jpeg",
+    videoUrl: vid2,
+    poster: img2,
     igLink: "https://www.instagram.com/reel/DVYn2kAET6p/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
   },
   {
     id: 3,
     title: "Fresh start",
-    videoUrl: "/media/vid3.mp4",
-    poster: "/media/img3.jpeg",
+    videoUrl: vid3,
+    poster: img3,
     igLink: "https://www.instagram.com/reel/DVONZCHFBZj/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
   },
   {
     id: 4,
     title: "Walk-in transformation",
-    videoUrl: "/media/vid4.mp4",
-    poster: "/media/img4.jpeg",
+    videoUrl: vid4,
+    poster: img4,
     igLink: "https://www.instagram.com/reel/DVPM5wUkaGH/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
   }
 ];

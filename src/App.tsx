@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { ArrowRight, CheckCircle, Star, Phone, Mail, MapPin, ChevronDown, Instagram, Clock, ShieldCheck, Sparkles, Facebook, Quote, ChevronLeft, ChevronRight, Globe } from "lucide-react";
 import SocialMediaSection from "./components/SocialMediaSection";
 import { translations } from "./translations";
-import heroImg from "./components/hero.jpg";
+
 
 // Error Boundary Component
 interface ErrorBoundaryProps {
@@ -61,36 +61,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
   }
 }
 
-import kaImg from "./components/ka.png";
-import b1 from "./components/before1.jpeg";
-import a1 from "./components/after1.jpeg";
-import b2 from "./components/before2.jpeg";
-import a2 from "./components/after2.jpeg";
-import b3 from "./components/before3.jpg";
-import a3 from "./components/after3.jpeg";
-import b4 from "./components/before4.jpeg";
-import a4 from "./components/after4.jpeg";
-import b5 from "./components/before5.jpeg";
-import a5 from "./components/after5.jpeg";
-import b6 from "./components/before6.jpeg";
-import a6 from "./components/after6.jpeg";
-import b7 from "./components/before7.jpeg";
-import a7 from "./components/after7.jpeg";
-import b8 from "./components/before8.jpeg";
-import a8 from "./components/after8.jpeg";
-import b9 from "./components/before9.jpeg";
-import a9 from "./components/after9.jpeg";
-import i1 from "./components/img1.jpeg";
-import i2 from "./components/img2.jpeg";
-import i3 from "./components/img3.jpeg";
-import i4 from "./components/img4.jpeg";
-import i5 from "./components/img5.jpeg";
-import i6 from "./components/img6.jpeg";
-import i7 from "./components/img7.jpeg";
-import i8 from "./components/img8.jpeg";
-import i9 from "./components/img9.jpeg";
-import i10 from "./components/img10.jpeg";
-import i11 from "./components/img11.jpeg";
+
 
 const Section = ({ children, className = "", innerClassName = "", id, delay = 0 }: { children: React.ReactNode; className?: string; innerClassName?: string; id?: string; delay?: number }) => (
   <section id={id} className={`py-20 px-6 ${className}`}>
