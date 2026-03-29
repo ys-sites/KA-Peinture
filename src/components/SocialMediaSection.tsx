@@ -53,7 +53,7 @@ export default function SocialMediaSection({ t }: { t: any }) {
   }, []);
 
   // Reduce background complexity for mobile
-  const rowsCount = isMobile ? 3 : 5;
+  const rowsCount = isMobile ? 7 : 5;
   const imagesPerRow = isMobile ? 6 : BACKGROUND_IMAGES.length;
   const mobileImages = BACKGROUND_IMAGES.slice(0, imagesPerRow);
 
