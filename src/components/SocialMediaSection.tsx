@@ -29,29 +29,29 @@ const VIDEOS = [
   {
     id: 1,
     title: "Doing it properly",
-    videoUrl: vid1,
-    poster: img1,
+    videoUrl: '/media/vid1.mp4',
+    poster: '/media/img1.jpeg',
     igLink: "https://www.instagram.com/reel/DViwbMGETk7/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
   },
   {
     id: 2,
     title: "La peinture",
-    videoUrl: vid2,
-    poster: img2,
+    videoUrl: '/media/vid2.mp4',
+    poster: '/media/img2.jpeg',
     igLink: "https://www.instagram.com/reel/DVYn2kAET6p/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
   },
   {
     id: 3,
     title: "Fresh start",
-    videoUrl: vid3,
-    poster: img3,
+    videoUrl: '/media/vid3.mp4',
+    poster: '/media/img3.jpeg',
     igLink: "https://www.instagram.com/reel/DVONZCHFBZj/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
   },
   {
     id: 4,
     title: "Walk-in transformation",
-    videoUrl: vid4,
-    poster: img4,
+    videoUrl: '/media/vid4.mp4',
+    poster: '/media/img4.jpeg',
     igLink: "https://www.instagram.com/reel/DVPM5wUkaGH/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
   }
 ];

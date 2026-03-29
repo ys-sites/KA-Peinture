@@ -187,15 +187,15 @@ const BeforeAfterSlider = ({ before, after, t }: { before: string; after: string
 
 const BeforeAfterGallery = ({ t }: { t: any }) => {
   const projects = [
-    { before: b1, after: a1 },
-    { before: b2, after: a2 },
-    { before: b3, after: a3 },
-    { before: b4, after: a4 },
-    { before: b5, after: a5 },
-    { before: b6, after: a6 },
-    { before: b7, after: a7 },
-    { before: b8, after: a8 },
-    { before: b9, after: a9 },
+    { before: "/media/before1.jpeg", after: "/media/after1.jpeg" },
+    { before: "/media/before2.jpeg", after: "/media/after2.jpeg" },
+    { before: "/media/before3.jpg", after: "/media/after3.jpeg" },
+    { before: "/media/before4.jpeg", after: "/media/after4.jpeg" },
+    { before: "/media/before5.jpeg", after: "/media/after5.jpeg" },
+    { before: "/media/before6.jpeg", after: "/media/after6.jpeg" },
+    { before: "/media/before7.jpeg", after: "/media/after7.jpeg" },
+    { before: "/media/before8.jpeg", after: "/media/after8.jpeg" },
+    { before: "/media/before9.jpeg", after: "/media/after9.jpeg" },
   ];
 
   const [startIndex, setStartIndex] = React.useState(0);
@@ -422,7 +422,7 @@ function AppContent() {
             animate={{ scale: 1 }}
             transition={{ duration: 10, ease: "easeOut" }}
             style={{
-              backgroundImage: `url(${heroImg})`,
+              backgroundImage: `url('/media/hero.jpg')`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
@@ -601,7 +601,7 @@ function AppContent() {
           {/* Image Side */}
           <div className="relative h-[400px] md:h-auto w-full">
             <img 
-              src={kaImg} 
+              src="/media/ka.png" 
               alt="Professional Painter" 
               className="w-full h-full object-cover grayscale brightness-105 contrast-105 hover:grayscale-0 transition-all duration-700"
             />
@@ -692,7 +692,14 @@ function AppContent() {
         {/* Background Images with Fade */}
         <div className="absolute inset-0 z-0 pointer-events-auto">
           <div className="grid grid-cols-6 grid-rows-6 h-full">
-            {[i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i1, i2, i3].map((img, i) => (
+            {[
+              "/media/img1.jpeg", "/media/img2.jpeg", "/media/img3.jpeg", "/media/img4.jpeg", "/media/img5.jpeg", "/media/img6.jpeg",
+              "/media/img7.jpeg", "/media/img8.jpeg", "/media/img9.jpeg", "/media/img10.jpeg", "/media/img11.jpeg", "/media/img1.jpeg",
+              "/media/img2.jpeg", "/media/img3.jpeg", "/media/img4.jpeg", "/media/img5.jpeg", "/media/img6.jpeg", "/media/img7.jpeg",
+              "/media/img8.jpeg", "/media/img9.jpeg", "/media/img10.jpeg", "/media/img11.jpeg", "/media/img1.jpeg", "/media/img2.jpeg",
+              "/media/img3.jpeg", "/media/img4.jpeg", "/media/img5.jpeg", "/media/img6.jpeg", "/media/img7.jpeg", "/media/img8.jpeg",
+              "/media/img9.jpeg", "/media/img10.jpeg", "/media/img11.jpeg", "/media/img1.jpeg", "/media/img2.jpeg", "/media/img3.jpeg"
+            ].map((img, i) => (
               <div key={i} className="relative group/item">
                 <img src={img} alt="" className="w-full h-full object-cover opacity-5 group-hover/main:blur-sm group-hover/main:opacity-10 transition-all duration-500" />
                 <img src={img} alt="" className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover/item:opacity-100 group-hover/item:blur-0 transition-all duration-300" />
