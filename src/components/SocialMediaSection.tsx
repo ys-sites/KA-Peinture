@@ -130,7 +130,7 @@ export default function SocialMediaSection({ t }: { t: any }) {
           <div className="md:hidden relative flex items-center justify-center max-w-sm mx-auto">
             <button 
               onClick={prevSlide}
-              className="absolute left-0 z-30 w-10 h-16 flex items-center justify-center bg-black/60 backdrop-blur-md text-white hover:bg-black/80 transition-all rounded-r-full"
+              className="absolute left-0 z-30 w-10 h-16 flex items-center justify-center bg-zinc-950/60 backdrop-blur-md text-white hover:bg-zinc-950/80 active:scale-95 transition-all rounded-r-full"
             >
               <ChevronLeft size={24} className="mr-1" />
             </button>
@@ -151,7 +151,7 @@ export default function SocialMediaSection({ t }: { t: any }) {
 
             <button 
               onClick={nextSlide}
-              className="absolute right-0 z-30 w-10 h-16 flex items-center justify-center bg-black/60 backdrop-blur-md text-white hover:bg-black/80 transition-all rounded-l-full"
+              className="absolute right-0 z-30 w-10 h-16 flex items-center justify-center bg-zinc-950/60 backdrop-blur-md text-white hover:bg-zinc-950/80 active:scale-95 transition-all rounded-l-full"
             >
               <ChevronRight size={24} className="ml-1" />
             </button>
@@ -205,12 +205,9 @@ function VideoCard({ video, index, t }: { video: any, index: number, key?: React
       transition={{ duration: 0.5, delay: 0.1 * index }}
       className="bg-white/5 backdrop-blur-md rounded-2xl overflow-hidden border border-white/10 group hover:border-white/30 transition-colors shadow-2xl"
     >
-      {/* Header - Clickable to IG */}
-      <a 
-        href={video.igLink} 
-        target="_blank" 
-        rel="noopener noreferrer"
-        className="flex items-center justify-between p-4 border-b border-white/10 hover:bg-white/10 transition-colors cursor-pointer gap-2"
+      {/* Header - Non-clickable */}
+      <div 
+        className="flex items-center justify-between p-4 border-b border-white/10 gap-2"
       >
         <div className="flex items-center gap-3 min-w-0">
           <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-yellow-400 via-rose-500 to-purple-600 p-[2px] shrink-0">
@@ -221,15 +218,15 @@ function VideoCard({ video, index, t }: { video: any, index: number, key?: React
           <span className="text-white font-medium text-sm truncate">{video.title}</span>
         </div>
         <div className="flex-none">
-          <span className="block text-[11px] sm:text-xs text-neutral-400 font-medium px-3 py-1.5 rounded-full bg-white/10 group-hover:bg-white/20 group-hover:text-white transition-colors whitespace-nowrap">
-            {t.transformation.viewOnIg || "View on IG"}
+          <span className="block text-[11px] sm:text-xs text-neutral-400 font-medium px-3 py-1.5 rounded-full bg-white/10 whitespace-nowrap">
+            Video Reel
           </span>
         </div>
-      </a>
+      </div>
 
       {/* Video Container */}
       <div 
-        className="relative aspect-[9/16] bg-black cursor-pointer overflow-hidden"
+        className="relative aspect-[9/16] bg-zinc-950 cursor-pointer overflow-hidden"
         onClick={togglePlay}
       >
         <video
@@ -246,7 +243,7 @@ function VideoCard({ video, index, t }: { video: any, index: number, key?: React
         
         {/* Play Button Overlay */}
         {!isPlaying && (
-          <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-colors">
+          <div className="absolute inset-0 flex items-center justify-center bg-zinc-950/30 group-hover:bg-zinc-950/40 transition-colors">
             <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 transform group-hover:scale-110 transition-transform">
               <Play size={24} className="text-white ml-1" fill="currentColor" />
             </div>

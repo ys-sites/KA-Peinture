@@ -9,7 +9,7 @@ export const translations = {
       getQuote: "Get a Quote"
     },
     hero: {
-      badge: "KA Peinture, experts in exterior and interior painting in Montreal",
+      badge: "YS Peinture, experts in exterior and interior painting in Montreal",
       title: "Tired of contractors who overpromise and underdeliver?",
       subtitle: "We bring structure, precision, and reliability to residential and commercial painting in Montreal. Get a flawless finish without the stress.",
       cta: "Get Your Free Quote",
@@ -31,7 +31,7 @@ export const translations = {
         desc: "Paint and protect surfaces, mainly doors, windows, furniture, stairs, fences, etc."
       },
       cta: {
-        title: "Ready to transform your space?",
+        title: "The YS Transformation",
         subtitle: "Get a free, professional, no-obligation quote today.",
         button: "Get a free quote"
       },
@@ -47,9 +47,9 @@ export const translations = {
       ]
     },
     about: {
-      title: "Why choose KA |",
+      title: "Why choose YS |",
       subtitle: "A service designed for demanding customers",
-      desc: "At KA Peinture, we don't just paint walls. We deliver well-managed projects, executed on time and with constant attention to detail:",
+      desc: "At YS Peinture, we don't just paint walls. We deliver well-managed projects, executed on time and with constant attention to detail:",
       points: [
         "95% of projects delivered on time",
         "Standardized and proven painting process",
@@ -67,12 +67,12 @@ export const translations = {
       viewOnIg: "View on Instagram"
     },
     testimonials: {
-      title: "The Trust of Our Customers",
+      title: "The YS Transformation",
       subtitle: "See what happens when you choose a contractor who actually cares about the details.",
       items: [
-        { name: "Loic Algieri", role: "Residential Client", text: "I am really impressed by the professionalism of KA Peinture. I highly recommend them for any residential project in Montreal!" },
-        { name: "Catherine Dorelas", role: "Business Owner", text: "Impeccable and very attentive service. I have worked with KA Peinture several times to refresh my beauty salon, and they always accompany me from start to finish, helping me choose colors and layouts to bring my vision to life. Thank you." },
-        { name: "Alexandre Côté", role: "Homeowner", text: "Very satisfied with KA Peinture's work. The team was punctual, respectful, and the result is truly impeccable. The preparation of the walls made all the difference. I recommend them without hesitation!" }
+        { name: "Loic Algieri", role: "Residential Client", text: "I am really impressed by the professionalism of YS Peinture. I highly recommend them for any residential project in Montreal!" },
+        { name: "Catherine Dorelas", role: "Business Owner", text: "Impeccable and very attentive service. I have worked with YS Peinture several times to refresh my beauty salon, and they always accompany me from start to finish, helping me choose colors and layouts to bring my vision to life. Thank you." },
+        { name: "Alexandre Côté", role: "Homeowner", text: "Very satisfied with YS Peinture's work. The team was punctual, respectful, and the result is truly impeccable. The preparation of the walls made all the difference. I recommend them without hesitation!" }
       ]
     },
     contact: {
@@ -119,9 +119,9 @@ export const translations = {
       desc: "Professional painting services for residential and commercial properties. Quality workmanship, reliable service, and stunning results for all your interior and exterior needs in Montreal.",
       links: "Quick Links",
       contact: "Contact",
-      rights: "© 2026 KA Peinture. All rights reserved.",
+      rights: "© 2026 YS Peinture. All rights reserved.",
       location: "Montreal, Quebec",
-      email: "admin@kapeinturemontreal.ca"
+      email: "info@ysdev.ca"
     },
     floatingCall: "Call"
   },
@@ -134,7 +134,7 @@ export const translations = {
       getQuote: "Obtenir un devis"
     },
     hero: {
-      badge: "KA Peinture, experts en peinture extérieure et intérieure à Montréal",
+      badge: "YS Peinture, experts en peinture extérieure et intérieure à Montréal",
       title: "Fatigué des entrepreneurs qui promettent trop et ne livrent pas assez ?",
       subtitle: "Nous apportons structure, précision et fiabilité à la peinture résidentielle et commerciale à Montréal. Obtenez une finition impeccable sans stress.",
       cta: "Obtenez votre devis gratuit",
@@ -172,9 +172,9 @@ export const translations = {
       ]
     },
     about: {
-      title: "Pourquoi choisir KA |",
+      title: "Pourquoi choisir YS |",
       subtitle: "Un service conçu pour les clients exigeants",
-      desc: "Chez KA Peinture, nous ne nous contentons pas de peindre des murs. Nous livrons des projets bien gérés, exécutés à temps et avec une attention constante aux détails :",
+      desc: "Chez YS Peinture, nous ne nous contentons pas de peindre des murs. Nous livrons des projets bien gérés, exécutés à temps et avec une attention constante aux détails :",
       points: [
         "95% des projets livrés à temps",
         "Processus de peinture standardisé et éprouvé",
@@ -192,12 +192,12 @@ export const translations = {
       viewOnIg: "Voir sur Instagram"
     },
     testimonials: {
-      title: "La confiance de nos clients",
+      title: "La Transformation YS",
       subtitle: "Découvrez ce qui se passe lorsque vous choisissez un entrepreneur qui se soucie réellement des détails.",
       items: [
-        { name: "Loic Algieri", role: "Client Résidentiel", text: "Je suis vraiment impressionné par le professionnalisme de KA Peinture. Je les recommande vivement pour tout projet résidentiel à Montréal !" },
-        { name: "Catherine Dorelas", role: "Propriétaire d'entreprise", text: "Service impeccable et très attentionné. J'ai travaillé avec KA Peinture à plusieurs reprises pour rafraîchir mon salon de beauté, et ils m'accompagnent toujours du début à la fin, m'aidant à choisir les couleurs et les agencements pour donner vie à ma vision. Merci." },
-        { name: "Alexandre Côté", role: "Propriétaire de maison", text: "Très satisfait du travail de KA Peinture. L'équipe était ponctuelle, respectueuse, et le résultat est vraiment impeccable. La préparation des murs a fait toute la différence. Je les recommande sans hésitation !" }
+        { name: "Loic Algieri", role: "Client Résidentiel", text: "Je suis vraiment impressionné par le professionnalisme de YS Peinture. Je les recommande vivement pour tout projet résidentiel à Montréal !" },
+        { name: "Catherine Dorelas", role: "Propriétaire d'entreprise", text: "Service impeccable et très attentionné. J'ai travaillé avec YS Peinture à plusieurs reprises pour rafraîchir mon salon de beauté, et ils m'accompagnent toujours du début à la fin, m'aidant à choisir les couleurs et les agencements pour donner vie à ma vision. Merci." },
+        { name: "Alexandre Côté", role: "Propriétaire de maison", text: "Très satisfait du travail de YS Peinture. L'équipe était ponctuelle, respectueuse, et le résultat est vraiment impeccable. La préparation des murs a fait toute la différence. Je les recommande sans hésitation !" }
       ]
     },
     contact: {
@@ -235,9 +235,9 @@ export const translations = {
       desc: "Services de peinture professionnels pour propriétés résidentielles et commerciales. Travail de qualité, service fiable et résultats époustouflants pour tous vos besoins intérieurs et extérieurs à Montréal.",
       links: "Liens rapides",
       contact: "Contact",
-      rights: "© 2026 KA Peinture. Tous droits réservés.",
+      rights: "© 2026 YS Peinture. Tous droits réservés.",
       location: "Montréal, Québec",
-      email: "admin@kapeinturemontreal.ca"
+      email: "info@ysdev.ca"
     },
     floatingCall: "Appeler"
   }

@@ -82,12 +82,12 @@ const Logo = ({ className = "" }: { className?: string }) => (
   <svg viewBox="0 0 200 160" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
     {/* Roof */}
     <path d="M20 70 L95 25 L110 35 L110 15 L130 15 L130 48 L180 80" stroke="currentColor" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round"/>
-    {/* K */}
-    <path d="M45 75 L45 125 M45 100 L75 75 M45 100 L75 125" stroke="#FF3B3B" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round"/>
+    {/* Y */}
+    <path d="M45 75 L60 100 L75 75 M60 100 L60 125" stroke="#FF3B3B" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round"/>
     {/* | */}
     <path d="M100 65 L100 135" stroke="#FF3B3B" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/>
-    {/* A */}
-    <path d="M125 125 L140 75 L155 125 M130 110 L150 110" stroke="#FF3B3B" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round"/>
+    {/* S */}
+    <path d="M155 82 C155 75, 130 75, 130 85 C130 98, 155 95, 155 108 C155 118, 130 118, 130 112" stroke="#FF3B3B" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round"/>
     {/* PEINTURE */}
     <text textAnchor="middle" x="100" y="155" fontFamily="sans-serif" fontSize="14" fontWeight="bold" letterSpacing="0.35em" fill="currentColor">PEINTURE</text>
   </svg>
@@ -152,7 +152,7 @@ const BeforeAfterSlider = ({ before, after, t }: { before: string; after: string
         </div>
       </div>
       
-      <div className="absolute top-6 left-6 bg-black/40 backdrop-blur-md text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.2em] z-20 border border-white/20">{t.transformation.before}</div>
+      <div className="absolute top-6 left-6 bg-zinc-950/40 backdrop-blur-md text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.2em] z-20 border border-white/20">{t.transformation.before}</div>
       <div className="absolute top-6 right-6 bg-primary/80 backdrop-blur-md text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.2em] z-20 border border-white/20">{t.transformation.after}</div>
     </div>
   );
@@ -195,20 +195,20 @@ const BeforeAfterGallery = ({ t }: { t: any }) => {
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">{t.transformation.title}</h2>
           <p className="text-neutral-600 max-w-xl">{t.transformation.subtitle}</p>
         </motion.div>
-        <div className="flex gap-4">
-          <button 
-            onClick={() => setStartIndex(prev => Math.max(prev - 1, 0))} 
-            className="w-14 h-14 rounded-full bg-primary text-white flex items-center justify-center transition-all active:scale-95 hover:bg-red-600 hover:shadow-lg"
-          >
-            <ChevronLeft size={24} />
-          </button>
-          <button 
-            onClick={() => setStartIndex(prev => Math.min(prev + 1, projects.length - itemsPerPage))} 
-            className="w-14 h-14 rounded-full bg-primary text-white flex items-center justify-center transition-all active:scale-95 hover:bg-red-600 hover:shadow-lg"
-          >
-            <ChevronRight size={24} />
-          </button>
-        </div>
+        
+        {/* Navigation Arrows */}
+        <button 
+          onClick={() => setStartIndex(prev => Math.max(prev - 1, 0))}
+          className="absolute top-1/2 -left-4 md:-left-12 -translate-y-1/2 bg-white p-3 rounded-full shadow-lg border border-neutral-200 z-10 hover:bg-neutral-50 active:scale-95 transition-all"
+        >
+          <ChevronLeft size={24} />
+        </button>
+        <button 
+          onClick={() => setStartIndex(prev => Math.min(prev + 1, projects.length - itemsPerPage))}
+          className="absolute top-1/2 -right-4 md:-right-12 -translate-y-1/2 bg-white p-3 rounded-full shadow-lg border border-neutral-200 z-10 hover:bg-neutral-50 active:scale-95 transition-all"
+        >
+          <ChevronRight size={24} />
+        </button>
       </div>
 
       {/* Laptop/Tablet/Mobile: Carousel */}
@@ -260,20 +260,12 @@ function AppContent() {
     setStatus('loading');
     
     try {
-      const response = await fetch('https://services.leadconnectorhq.com/hooks/o7aUwpKbtkP4AOP0pEjC/webhook-trigger/162782af-467c-44ec-8e0a-890a65bb1f8b', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        setStatus('success');
-        setFormData({ fullName: '', phone: '', email: '', city: '', service: '', details: '' });
-      } else {
-        setStatus('error');
-      }
+      // Simulate form submission to generic portfolio backend (notifying cloud@ysdev.ca)
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      console.log("Mock lead notification sent to cloud@ysdev.ca:", formData);
+      
+      setStatus('success');
+      setFormData({ fullName: '', phone: '', email: '', city: '', service: '', details: '' });
     } catch (error) {
       console.error('Submission error:', error);
       setStatus('error');
@@ -293,7 +285,7 @@ function AppContent() {
           <div className="flex items-center gap-6">
             <a href="#" className="pl-3 flex items-center gap-2 hover:opacity-80 transition-opacity">
               <Logo className="w-8 h-8" />
-              <span className="text-lg font-bold tracking-tight text-neutral-900 whitespace-nowrap">KA Peinture</span>
+              <span className="text-lg font-bold tracking-tight text-neutral-900 whitespace-nowrap">YS Peinture</span>
             </a>
             
             <div className="hidden lg:flex items-center bg-neutral-100/50 rounded-full p-1 gap-1">
@@ -334,19 +326,19 @@ function AppContent() {
             <div className="flex items-center bg-neutral-100/50 rounded-full p-1 mr-2">
               <button 
                 onClick={() => setLang('en')} 
-                className={`px-3 py-1.5 rounded-full text-[10px] font-bold transition-all ${lang === 'en' ? 'bg-white text-primary shadow-sm' : 'text-neutral-400 hover:text-neutral-600'}`}
+                className={`px-3 py-1.5 rounded-full text-[10px] font-bold active:scale-95 transition-all ${lang === 'en' ? 'bg-white text-primary shadow-sm' : 'text-neutral-400 hover:text-neutral-600'}`}
               >
                 EN
               </button>
               <button 
                 onClick={() => setLang('fr')} 
-                className={`px-3 py-1.5 rounded-full text-[10px] font-bold transition-all ${lang === 'fr' ? 'bg-white text-primary shadow-sm' : 'text-neutral-400 hover:text-neutral-600'}`}
+                className={`px-3 py-1.5 rounded-full text-[10px] font-bold active:scale-95 transition-all ${lang === 'fr' ? 'bg-white text-primary shadow-sm' : 'text-neutral-400 hover:text-neutral-600'}`}
               >
                 FR
               </button>
             </div>
             
-            <a href="#contact" className="hidden sm:flex bg-primary text-white px-6 py-2.5 rounded-full font-bold hover:bg-rose-700 transition-all text-sm items-center gap-2 shadow-lg shadow-primary/20">
+            <a href="#contact" className="hidden sm:flex bg-primary text-white px-6 py-2.5 rounded-full font-bold hover:bg-rose-700 active:scale-[0.98] transition-all text-sm items-center gap-2 shadow-lg shadow-primary/20">
               {t.nav.getQuote} <ArrowRight size={16} />
             </a>
           </div>
@@ -354,7 +346,7 @@ function AppContent() {
       </motion.div>
 
       {/* Hero - Attention & Intent */}
-      <Section id="hero" className="pt-32 pb-24 text-center relative overflow-hidden min-h-[85vh] flex items-center justify-center">
+      <Section id="hero" className="pt-32 pb-24 text-center relative overflow-hidden min-h-[85dvh] flex items-center justify-center">
         <div className="absolute inset-0 z-0">
           <motion.div 
             className="w-full h-full"
@@ -367,8 +359,8 @@ function AppContent() {
               backgroundPosition: "center",
             }}
           />
-          <div className="absolute inset-0 bg-black/30"></div>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60"></div>
+          <div className="absolute inset-0 bg-zinc-950/30"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/40 via-transparent to-zinc-950/60"></div>
         </div>
         
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6">
@@ -404,7 +396,7 @@ function AppContent() {
             transition={{ delay: 0.3 }}
             className="flex flex-col items-center justify-center gap-4"
           >
-            <a href="#contact" className="bg-primary text-white px-8 sm:px-10 py-4 sm:py-5 rounded-full font-bold text-base sm:text-lg hover:bg-red-600 transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-1">
+            <a href="#contact" className="bg-primary text-white px-8 sm:px-10 py-4 sm:py-5 rounded-full font-bold text-base sm:text-lg hover:bg-red-600 active:scale-95 transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-1">
               {t.hero.cta} <ArrowRight size={18} />
             </a>
             <p className="text-xs sm:text-sm text-white/80 font-semibold flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full backdrop-blur-md border border-white/20 shadow-sm">
@@ -479,7 +471,7 @@ function AppContent() {
             </div>
             <h3 className="text-xl sm:text-2xl font-bold mb-2">{t.services.cta.title}</h3>
             <p className="text-white/80 mb-5 sm:mb-6 max-w-md text-sm sm:text-base">{t.services.cta.subtitle}</p>
-            <a href="#contact" className="bg-white text-primary px-5 sm:px-6 py-3 sm:py-3 rounded-full font-bold text-xs sm:text-sm hover:bg-neutral-50 transition-colors flex items-center gap-2">
+            <a href="#contact" className="bg-white text-primary px-5 sm:px-6 py-3 sm:py-3 rounded-full font-bold text-xs sm:text-sm hover:bg-neutral-50 active:scale-95 transition-all flex items-center gap-2">
               {t.services.cta.button} <ArrowRight size={14} sm-size={16} />
             </a>
           </motion.div>
@@ -544,7 +536,7 @@ function AppContent() {
           <div className="relative h-[400px] md:h-auto w-full">
             {/* Mobile Image: Colors when in view */}
             <motion.img 
-              src="/media/ka.png" 
+              src="/media/painter.png" 
               alt="Professional Painter" 
               initial={{ filter: "grayscale(100%) brightness(105%) contrast(105%)" }}
               whileInView={{ filter: "grayscale(0%) brightness(100%) contrast(100%)" }}
@@ -553,7 +545,7 @@ function AppContent() {
             />
             {/* Desktop Image: Colors on hover */}
             <img 
-              src="/media/ka.png" 
+              src="/media/painter.png" 
               alt="Professional Painter" 
               className="hidden md:block w-full h-full object-cover grayscale brightness-105 contrast-105 hover:grayscale-0 transition-all duration-700"
             />
@@ -589,7 +581,7 @@ function AppContent() {
             </p>
             
             <div>
-              <a href="#contact" className="inline-block bg-primary text-white px-8 py-4 font-bold hover:bg-red-600 transition-colors rounded-sm">
+              <a href="#contact" className="inline-block bg-primary text-white px-8 py-4 font-bold hover:bg-red-600 active:scale-[0.98] transition-all rounded-sm">
                 {t.about.cta}
               </a>
             </div>
@@ -772,7 +764,7 @@ function AppContent() {
                 <button 
                   type="submit"
                   disabled={status === 'loading'}
-                  className="w-full bg-primary text-white font-bold text-base md:text-lg py-4 md:py-5 rounded-xl hover:bg-rose-700 transition-all mt-2 md:mt-4 flex justify-center items-center gap-2 shadow-lg shadow-primary/20 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-primary text-white font-bold text-base md:text-lg py-4 md:py-5 rounded-xl hover:bg-rose-700 active:scale-[0.98] transition-all mt-2 md:mt-4 flex justify-center items-center gap-2 shadow-lg shadow-primary/20 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {status === 'loading' ? t.contact.form.sending : t.contact.form.submit} <ArrowRight size={18} md-size={20} />
                 </button>
@@ -799,12 +791,12 @@ function AppContent() {
             <div className="text-white flex items-center gap-4">
               <Logo className="w-48 h-48" />
               <div className="flex flex-col gap-2">
-                <span className="text-2xl font-bold tracking-tight">KA Peinture</span>
+                <span className="text-2xl font-bold tracking-tight">YS Peinture</span>
                 <div className="flex gap-4 justify-start">
-                  <a href="https://www.instagram.com/ka.peinture/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-neutral-900 flex items-center justify-center hover:bg-primary hover:text-white transition-all">
+                  <a href="#" className="w-10 h-10 rounded-full bg-neutral-900 flex items-center justify-center hover:bg-primary hover:text-white transition-all">
                     <Instagram size={20} />
                   </a>
-                  <a href="https://www.facebook.com/ka.peinture1" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-neutral-900 flex items-center justify-center hover:bg-primary hover:text-white transition-all">
+                  <a href="#" className="w-10 h-10 rounded-full bg-neutral-900 flex items-center justify-center hover:bg-primary hover:text-white transition-all">
                     <Facebook size={20} />
                   </a>
                 </div>
@@ -829,9 +821,25 @@ function AppContent() {
             <div>
               <h4 className="text-white font-bold mb-6">{t.footer.contact}</h4>
               <ul className="space-y-3">
-                <li className="flex items-center gap-3"><Phone size={16} className="text-primary" /> (514) 622-1599</li>
-                <li className="flex items-center gap-3"><Mail size={16} className="text-primary" /> {t.footer.email}</li>
-                <li className="flex items-center gap-3"><MapPin size={16} className="text-primary" /> {t.footer.location}</li>
+                <li className="flex items-center gap-3">
+                  <Phone size={16} className="text-primary" />
+                  <a href="tel:+14384048385" className="hover:text-primary transition-colors">+1 (438) 404-8385</a>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Mail size={16} className="text-primary" />
+                  <a href="mailto:info@ysdev.ca" className="hover:text-primary transition-colors">info@ysdev.ca</a>
+                </li>
+                <li className="flex items-center gap-3">
+                  <MapPin size={16} className="text-primary" />
+                  <a 
+                    href="https://maps.google.com/?q=Montreal,+QC" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="hover:text-primary transition-colors"
+                  >
+                    {t.footer.location}
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
@@ -843,17 +851,17 @@ function AppContent() {
 
       {/* Floating Call Button */}
       <motion.a
-        href="tel:5146221599"
+        href="tel:+14384048385"
         initial={{ opacity: 0, scale: 0.5, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         className="fixed bottom-4 right-4 z-50 w-14 h-14 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center hover:bg-red-600 transition-colors group"
-        aria-label="Call KA Peinture"
+        aria-label="Call YS Peinture"
       >
         <Phone size={24} className="group-hover:animate-bounce" />
         <span className="absolute right-full mr-4 bg-white text-neutral-900 px-4 py-2 rounded-xl text-sm font-bold shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none border border-neutral-100">
-          {t.hero.consultation.split(':')[0]} (514) 622-1599
+          {t.hero.consultation.split(':')[0]} +1 (438) 404-8385
         </span>
       </motion.a>
     </main>
