@@ -78,18 +78,20 @@ const Section = ({ children, className = "", innerClassName = "", id, delay = 0 
 );
 
 
-const Logo = ({ className = "" }: { className?: string }) => (
+const Logo = ({ className = "", lang = "en" }: { className?: string; lang?: string }) => (
   <svg viewBox="0 0 200 160" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
     {/* Roof */}
     <path d="M20 70 L95 25 L110 35 L110 15 L130 15 L130 48 L180 80" stroke="currentColor" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round"/>
-    {/* Y */}
-    <path d="M45 75 L60 100 L75 75 M60 100 L60 125" stroke="#FF3B3B" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round"/>
+    {/* K */}
+    <path d="M45 75 L45 125 M45 100 L75 75 M45 100 L75 125" stroke="#FF3B3B" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round"/>
     {/* | */}
     <path d="M100 65 L100 135" stroke="#FF3B3B" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/>
-    {/* S */}
-    <path d="M155 82 C155 75, 130 75, 130 85 C130 98, 155 95, 155 108 C155 118, 130 118, 130 112" stroke="#FF3B3B" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round"/>
-    {/* PEINTURE */}
-    <text textAnchor="middle" x="100" y="155" fontFamily="sans-serif" fontSize="14" fontWeight="bold" letterSpacing="0.35em" fill="currentColor">PEINTURE</text>
+    {/* P */}
+    <path d="M130 75 L130 125 M130 75 C155 75, 155 100, 130 100" stroke="#FF3B3B" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round"/>
+    {/* Dynamic Text */}
+    <text textAnchor="middle" x="100" y="155" fontFamily="sans-serif" fontSize="14" fontWeight="bold" letterSpacing="0.35em" fill="currentColor">
+      {lang === "fr" ? "PEINTURE" : "PAINTING"}
+    </text>
   </svg>
 );
 
@@ -284,8 +286,8 @@ function AppContent() {
         <nav className="bg-white border border-neutral-200/50 rounded-full px-3 py-2 flex items-center justify-between shadow-[0_8px_30px_rgb(0,0,0,0.08)]">
           <div className="flex items-center gap-6">
             <a href="#" className="pl-3 flex items-center gap-2 hover:opacity-80 transition-opacity">
-              <Logo className="w-8 h-8" />
-              <span className="text-lg font-bold tracking-tight text-neutral-900 whitespace-nowrap">YS Peinture</span>
+              <Logo className="w-8 h-8" lang={lang} />
+              <span className="text-lg font-bold tracking-tight text-neutral-900 whitespace-nowrap">{lang === 'fr' ? 'King Peinture' : 'King Painting'}</span>
             </a>
             
             <div className="hidden lg:flex items-center bg-neutral-100/50 rounded-full p-1 gap-1">
@@ -407,7 +409,7 @@ function AppContent() {
       </Section>
 
       <Section className="bg-neutral-950 px-0 py-0 overflow-hidden">
-        <React.Suspense fallback={<div className="min-h-[70vh] bg-neutral-950 flex items-center justify-center"><Logo className="w-16 h-16 animate-pulse" /></div>}>
+        <React.Suspense fallback={<div className="min-h-[70vh] bg-neutral-950 flex items-center justify-center"><Logo className="w-16 h-16 animate-pulse" lang={lang} /></div>}>
           <SocialMediaSection t={t} />
         </React.Suspense>
       </Section>
@@ -789,9 +791,9 @@ function AppContent() {
         >
           <div className="flex flex-col items-start gap-4 shrink-0 md:w-1/3">
             <div className="text-white flex items-center gap-4">
-              <Logo className="w-48 h-48" />
+              <Logo className="w-48 h-48" lang={lang} />
               <div className="flex flex-col gap-2">
-                <span className="text-2xl font-bold tracking-tight">YS Peinture</span>
+                <span className="text-2xl font-bold tracking-tight">{lang === 'fr' ? 'King Peinture' : 'King Painting'}</span>
                 <div className="flex gap-4 justify-start">
                   <a href="#" className="w-10 h-10 rounded-full bg-neutral-900 flex items-center justify-center hover:bg-primary hover:text-white transition-all">
                     <Instagram size={20} />
@@ -857,7 +859,7 @@ function AppContent() {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         className="fixed bottom-4 right-4 z-50 w-14 h-14 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center hover:bg-red-600 transition-colors group"
-        aria-label="Call YS Peinture"
+        aria-label={lang === 'fr' ? "Appeler King Peinture" : "Call King Painting"}
       >
         <Phone size={24} className="group-hover:animate-bounce" />
         <span className="absolute right-full mr-4 bg-white text-neutral-900 px-4 py-2 rounded-xl text-sm font-bold shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none border border-neutral-100">
