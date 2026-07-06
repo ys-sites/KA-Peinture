@@ -646,9 +646,9 @@ function AppContent() {
               "/media/img3.jpeg", "/media/img4.jpeg", "/media/img5.jpeg", "/media/img6.jpeg", "/media/img7.jpeg", "/media/img8.jpeg",
               "/media/img9.jpeg", "/media/img10.jpeg", "/media/img11.jpeg", "/media/img1.jpeg", "/media/img2.jpeg", "/media/img3.jpeg"
             ].map((img, i) => (
-              <div key={i} className="relative group/item">
+              <div key={i} className="relative group/item overflow-hidden">
                 <img src={img} alt="" className="w-full h-full object-cover opacity-5 group-hover/main:blur-sm group-hover/main:opacity-10 transition-all duration-500" />
-                <img src={img} alt="" className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover/item:opacity-100 group-hover/item:blur-0 transition-all duration-300" />
+                <img src={img} alt="" className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover/item:opacity-100 group-hover/item:blur-0 group-hover/item:scale-110 transition-all duration-500" />
               </div>
             ))}
           </div>
